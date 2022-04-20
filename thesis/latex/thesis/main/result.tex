@@ -1,0 +1,583 @@
+% =============================================================================
+\chapter{Résultats}
+% =============================================================================
+
+% -----------------------------------------------------------------------------
+\section{Dataset}
+% -----------------------------------------------------------------------------
+    % Boxplot des stéroïdes brut
+    % Histogramme des stéroides manquantes
+    % Histogramme des patients manquants
+    % Boxplot des stéroïdes nettoyé
+
+
+    La \autoref{fig:boxplots_raw_steroids} illustre les principales caractéristiques du dataset de stéroïdes. En observant les boxplots de chaque variable, on constate qu'il y a beaucoup d'outliers positifs. Toutes les médianes ont des valeurs inférieures ou égales à 0 et il n'y a aucun outlier négatif. Ceci est probablement dû à la nature de la prise de mesure sur les patients. En effet, ces mesures étant des concentrations stéroïdiennes, leurs distributions ne seront a priori jamais en dessous d'un certain seuil.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=1\textwidth]{img/00_boxplots_raw_steroids_day}    
+        \caption{Boxplot des stéroïdes bruts normalisés}
+        \label{fig:boxplots_raw_steroids}
+    \end{figure}
+
+    La \autoref{fig:hist_missing_patients} et \autoref{fig:hist_missing_steroids} représentent la distribution des valeurs manquantes par patient et par stéroïde. On observe sur l'histogramme par patients que la majorité des ceux-ci ont moins de 5 valeurs manquantes et qu'une minorité isolée a environ une quarantaine de valeurs manquantes. L'observation de l'histogramme des valeurs manquantes par stéroïde nous révèle que la plupart ont moins de 100 valeurs manquantes et qu'une d'entre elle a environ 450 valeurs manquantes.
+
+    \begin{figure}[H]
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+                \includegraphics[width=0.8\textwidth]{img/01_hist_missing_patients}
+                \caption{Histogramme des patients manquants}
+                \label{fig:hist_missing_patients}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+                \includegraphics[width=0.8\textwidth]{img/01_hist_missing_steroids}
+                \caption{Histogramme des stéroïdes manquants}
+                \label{fig:hist_missing_steroids}
+        \end{subfigure}
+        \caption{Histogrammes des valeurs manquantes}
+        \label{fig:hist_missing}
+    \end{figure}
+
+    Sur les 40 stéroïdes initiaux, cinq ont été enlevés, car ils avaient plus de 100 valeurs manquantes. Sur les 1129 patients initiaux, 67 ont été enlevés, car ils avaient plus de 5 valeurs manquantes. Les deux seuils de suppression des valeurs manquantes ont été choisis en observant les histogrammes \autoref{fig:hist_missing_patients} et \autoref{fig:hist_missing_steroids}. Les causes des valeurs manquantes ne sont pas connues, le dataset nous ayant été fourni ainsi. Vu le caractère exploratoire de ce projet, le traitement des valeurs manquantes a volontairement été fait d'une manière simple; les patients et stéroïdes avec trop de valeurs manquantes ont été supprimés et les valeurs manquantes restantes ont été remplacées par la moyenne.
+
+% -----------------------------------------------------------------------------
+\section{Corrélation globale}
+% -----------------------------------------------------------------------------
+    % Matrice de corrélation colorée
+    % Matrice du coefficient de Pearson
+    % Matrice de la p-valeur
+    % Tableau des paires les plus corrélées classées par P-Valeur
+
+
+    % Ordre des catégories de stéroïdes (observer la matrice de h en b ou de g à d)
+        % On voit 5 familles claires sur les 6
+        % dénombrer les 6 familles
+            % Par chance (vraiment?), les cat de stéroides ordonnées crées des séparations de la matrice, ce qui facilite la lecture. 
+
+    % Ordre des catégories de corrélations
+
+        % Parmis ces corrélations certaines ne sont que peu porteuse d'info (proche diag)
+
+        % On distingue 2 types de corrélations
+            % Intra-catégorie de stéroides
+            % Inter-catégorie de stéroides
+
+        % Stéroïdes très peu corrélées
+
+\subsection{Matrice de corrélation}
+    \label{sct:correlation_matrix}
+
+    Le triplet de matrices \autoref{fig:correlation_matrices} nous donne la vue globale des corrélations entre stéroïdes. La coloration des scatter plots de la \autoref{fig:colored_matrix_categories} indique si la P-valeur entre les deux variables est inférieure (vert) ou supérieure (rouge) au seuil choisi dans la \autoref{sec:globalCorr}. Sur cette matrice, les stéroïdes sont répartis dans six catégories biologiques définies par D\up{re} Murielle Bochud. Cinq groupes de stéroïdes sont bien visibles sur les six catégories classées. La distinction de ces catégories est assez aisée même sans les séparations de la \autoref{fig:colored_matrix_categories}, car il y a une alternance entre catégories de stéroïdes corrélées et non corrélées.
+
+    \begin{figure}[H]
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=.9\textwidth]{img/03_pearson_matrix}    
+            \caption{Coloration de la matrice de corrélation selon\\ le coefficient de Pearson}
+            \label{fig:pearson_matrix}
+        \end{subfigure}
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=.9\textwidth]{img/03_pvalue_matrix}    
+            \caption{Coloration de la matrice de corrélation selon\\ la P-valeur}
+            \label{fig:pvalue_matrix}
+        \end{subfigure}
+        \caption{Matrices de corrélation}
+        \label{fig:correlation_matrices}
+    \end{figure}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{img/custom/03_colored_matrix_category}    
+        \caption{Matrice de corrélation séparée par catégorie de stéroïdes}
+        \label{fig:colored_matrix_categories}
+    \end{figure}
+
+    Parmi l'ensemble des corrélations, toutes ne sont pas porteuses d'informations. En effet, vu le classement des stéroïdes, les métabolites de même catégorie se retrouvent côte à côte. Ce fait implique que la distance des corrélations à la diagonale apporte de l'information. Si deux stéroïdes sont corrélés et loin de la diagonale, il y a plus de chance qu'il s'agisse d'une corrélation atypique. À l'inverse, il est plus probable que les corrélations proches de la diagonale soient sans surprise; hormis lorsqu'il s'agit de stéroïdes de catégories différentes. Les corticostérones comme le Tetrahydrodehydrocorticostérone (cr\_tha\_d), le Tetrahydrocorticostérone (cr\_thb\_d) et le 5a-Tetrahydrocorticostérone (cr\_sa\_thb\_d) sont un exemple de stéroïdes très corrélés, de la même catégorie se trouvant à proximité de la diagonale.
+
+    Étant donné les différentes catégories de stéroïdes, nous classerons les corrélations selon deux types: au sein d'une même catégorie et entre stéroïdes de deux catégories différentes.
+
+\subsection{Corrélations au sein d'une même catégorie}
+    Les zones de corrélation qui suivent la diagonale\footnote{Ces zones sont les corrélations entre les stéroïdes de même catégorie} de la \autoref{fig:colored_matrix_categories} sont généralement composé de corrélations colorées en vert, soit en dessous du seuil de P-valeur. Selon la \autoref{fig:pearson_matrix}, c'est généralement dans ces différentes zones qu'on constate les corrélations les plus fortes.
+
+    Les zones les plus actives selon les valeurs de corrélation de Pearson sont les androgènes précurseurs, 3 des 5 minéralcorticoïdes (Tetrahydrodehydrocorticostérone (cr\_tha\_d), la Tetrahydrocorticostérone (cr\_thb\_d) et le 5a-Tetrahydrocorticostérone (cr\_sa\_thb\_d)) et finalement, dans les glucocorticoïdes, on constate la présence de 5 clusters de stéroïdes corrélés. 
+
+    % TODO détailler les cluster.
+
+\subsection{Corrélations entre catégories différentes}
+    Par rapport aux zones de même catégorie, les zones de catégories différentes ont des P-valeur plus fréquemment au-delà du seuil et sont donc coloriées en rouge. De plus, ces zones ont généralement des corrélations de Pearson moins fortes et plus isolées. L'annexe \autoref{tab:diff_cat_corr} référence les stéroïdes les plus corrélées qui ne font pas partie de la même catégorie.
+
+    %\begin{table}[H]
+    %\centering
+    %\input{table/table_03_corr_diff_cat_top10}
+    %\caption{Les dix stéroïdes les plus corrélées qui n'appartiennent pas à la même catégorie}
+    %\label{tab:top10}
+    %\end{table}
+
+\subsection{Stéroïdes peu corrélés}
+    Finalement, certains stéroïdes ne sont que peu, voire très peu, corrélés avec toutes les autres. Par exemple: cr\_estriol\_d, cr\_17b\_estradiol\_b, cr\_pd\_d et cr\_l8\_oh\_tha\_d. 
+
+% -----------------------------------------------------------------------------
+\section{Corrélation partielle}
+% -----------------------------------------------------------------------------
+    % Développement
+        % Arborescence du package python
+        % Signatures des méthodes du package
+        % Output de getUmatrix()
+        % Output de getComponentPlanes()
+        % Output de getErrorPlot()
+
+    % Calibration
+        % Plot de l'erreur 3D avec le dataset de test
+        % Plot de l'erreur 3D avec le dataset de stéroides après run low res
+        % Plot de l'erreur 3D avec le dataset de stéroides après run high res
+
+    % SOM calibrée
+    % Composants planaires calibrés
+
+    % Coloration des Component planes selon certaines variables
+        % Choix des variables
+        % Composants planaires colorés
+
+\subsection{Calibration}
+
+\subsubsection*{Grid search sur le dataset de test}
+
+    Pendant le développement du code effectuant la mesure d'erreur pour plusieurs nombres d'itérations et dimensions différentes, nous avons produit le 3D plot \autoref{fig:grid_error_test}. Il illustre la zone d'intérêt pour le calcul d'une SOM idéale. C.-à-d. là où la variation de l'erreur sera insignifiante. Dans le cas de ce dataset, cette zone se situe de 20 à 30 itérations pour une dimension de 20 à 30 neurones, dans la partie supérieur de la figure citée précédemment.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.45\textwidth]{img/06_grid_error_test}    
+        \caption{Valeur finale de l'erreur en fonction de la taille et du nombre d'itérations de la carte de Kohonen avec un dataset de développement}
+        \label{fig:grid_error_test}
+    \end{figure}
+
+    % TODO: Mettre un point sur le plot grid_error_test
+
+\subsubsection*{Grid search sur le dataset des stéroïdes}
+    
+    Même avec une résolution plus faible, la \autoref{fig:errorLowRes} montre des caractéristiques similaires à la \autoref{fig:grid_error_test}. On observe la convergence vers un plateau dès une dimension de 50 neurones pour 40 itérations. Ceci a permis de choisir les valeurs du grid search ``hiRes'' comme étant celles du quart inférieur droit du carré central de la \autoref{fig:errorMatshowLowRes}. Soit de 55 à 85 itérations et de 75 à 125 neurones.
+
+    \begin{figure}[H]
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=0.8\textwidth]{img/08_grid_error_steroids_160529_1019_lowRes}    
+            \caption{Plot de l'erreur}
+            \label{fig:errorPlotLowRes}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.45\textwidth}
+            \centering
+            \includegraphics[width=0.6\textwidth]{img/08_matshow_error_steroids_160529_1019_lowRes}    
+            \caption{Matshow de l'erreur}
+            \label{fig:errorMatshowLowRes}
+        \end{subfigure}
+        \caption{Valeurs finales des erreurs issues du grid search ``lowRes''}
+        \label{fig:errorLowRes}
+    \end{figure}
+
+    \begin{table}[H]
+        \centering
+        \input{table/table_08_errorMatrix_160529_1019_lowRes}
+        \caption{Matrice d'erreur finale en fonction de la taille et du nombre d'itérations de la carte de Kohonen après l'exécution du grid search ``lowRes'' avec le dataset de stéroïdes}
+        \label{tab:errorMatrixLowRes}
+    \end{table}
+
+    Une fois le grid search ``hiRes'' effectué, nous avons obtenu les plots \autoref{fig:errorHiRes}. Nous avons choisi 75 itérations pour une dimension de 92 neurones, selon la méthode \autoref{sct:calibrationDimIter}.
+
+    \begin{figure}[H]
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=0.8\textwidth]{img/08_grid_error_steroids_160530_0916_hiRes}
+            \caption{Plot de l'erreur}
+            \label{fig:errorPlotHiRes}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.5\textwidth}
+            \centering
+            \includegraphics[width=0.6\textwidth]{img/08_matshow_error_steroids_160530_0916_hiRes}    
+            \caption{Matshow de l'erreur}
+            \label{fig:errorMatshowHiRes}
+        \end{subfigure}
+        \caption{Valeurs finales des erreurs issues du grid search ``hiRes''}
+        \label{fig:errorHiRes}
+    \end{figure}
+
+
+    \begin{table}[H]
+        \centering
+        \input{table/table_08_errorMatrix_160530_0916_hiRes}
+        \caption{Matrice d'erreur finale en fonction de la taille et du nombre d'itérations de la carte de Kohonen après l'exécution du grid search ``hiRes'' avec le dataset de stéroïdes}
+        \label{tab:errorMatrixHiRes}
+    \end{table}
+
+    %TODO Mettre les résultats de la calibration de la learning rate et de la neighborhood size
+
+\subsection{Self-Organizing Map calibrée}
+\label{sct:calibratedSOM}
+    % Paramètres de la SOM idéale
+    % U-Matrix de la SOM idéale
+    % Extraction des composants planaires
+
+    La calibration de la SOM effectuée dans la section précédente nous permet de déterminer les paramètres, que l'on trouve sur \autoref{lst:calibratedSomParams}. On remarque que la taille de la carte est grande pour le nombre d'exemples, 1067 patients, qui y sont associés. En effet, la SOM possède 13'708 neurones\footnote{Le nombre de neurones est obtenu en faisant le produit des dimensions $x$ et $y$ de la carte de Kohonen}, plus de 10 fois le nombre de patients. Ces dimensions sont le meilleur compromis pour obtenir la SOM la plus représentative de notre dataset. 
+
+    % Le rapport de la taille de la carte, soit le nombre de neurones, sur le nombre d'exemple nous donne déjà une indication. Un grand rapport pourrait indiquer un dataset complexe ou des neurones neurones de ``laisison'' rentre en jeu comme illustré dans la figure X.
+
+    % TODO: inverser x, y dans les notebooks
+
+    \begin{listing}[H]
+    \begin{pythoncode}
+    params = {
+                'n_iter' : 75, 
+                'x' : 149,
+                'y' : 92,
+                'dimension' : 35,
+                'learning_rate' : (0.012, 0.001),
+                'neighborhood_size' : (75, 1) 
+            }
+    \end{pythoncode}
+    \caption{Paramètres de la SOM calibrée}
+    \label{lst:calibratedSomParams}
+    \end{listing}
+
+    Suite à l'exécution du programme de calcul de la SOM avec ces paramètres, nous avons obtenu les résultats de la \autoref{fig:SOMresults}. La courbe de learning rate \autoref{fig:calibratedSomError} est bonne, l'erreur ayant diminué d'un facteur 2 avec les paramètres ci-dessus. Le plat du tiers gauche indique que les neurones ont mis une vingtaine d'itérations avant de commencer à converger vers les données. 
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.4\textwidth]{img/09_steroid_calibrated_error_plot_lr_0.012_to_0.001.png}    
+        \caption{Erreur de la SOM calibrée}
+        \label{fig:calibratedSomError}
+    \end{figure}
+
+    %TODO : Centrer la U-Matrix
+
+    \begin{figure}[H]
+        \begin{subfigure}[b]{0.6\textwidth}
+            \centering
+            \includegraphics[width=0.9\textwidth]{img/09_steroid_calibrated_som_lr_0.012_to_0.001.png}
+            \caption{U-Matrix de la SOM calibrée}
+            \label{fig:calibratedSom}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.4\textwidth}
+            \centering
+            \includegraphics[height=0.19\textheight]{img/09_steroid_calibrated_component_planes_lr_0.012_to_0.001.png}    
+            \caption{Component planes de la SOM calibrée}
+            \label{fig:calibratedCp}
+        \end{subfigure}
+        \caption{Résultats du calcul de la SOM avec les paramètres \autoref{lst:calibratedSomParams}}
+        \label{fig:SOMresults}
+    \end{figure}
+
+    Le détail de l'activité d'un stéroïde dans le dataset est visible en comparant les composants planaires avec la U-Matrix, respectivement \autoref{fig:calibratedCp} et \autoref{fig:calibratedSom}. De ces comparaisons nous tirons deux résultats: les stéroïdes les plus influents du dataset et les stéroïdes corrélés.
+
+\subsubsection*{Activité des stéroïdes}
+
+    % TODO: revoir cette section une fois que j'aurai modifié le tableau.
+
+    % On observe une division en 5 zones
+        % Ces divisions veulent dire que :
+            % - l'activité des stéroïdes est réparties dans plusieurs endroits différents de l'espace des 35 stéroïdes
+            % - l'activité des stéroïdes est plus facilement détéctable à certain endroits car plus forte
+            % - Il y a certain endroit ou l'activité d'une stéroïde n'est pas détéctable
+
+    La SOM calibrée de la \autoref{fig:calibratedSomWithZone} nous montre les zones d'activité des stéroïdes. En bleu, on observe les zones ou l'activité est similaire entre plusieurs stéroïdes. Les zones rouges indiquent une séparation entre zones. On remarque que la SOM est divisée en 5 zones principales. Cela signifie que l'activité des stéroïdes est répartie sur 5 endroits différents de l'espace des 35 métabolites du dataset. La SOM sans zones délimitées se trouve dans les annexes.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{img/custom/09_somWithZone.png}
+        \caption{U-Matrix de la SOM calibrée et ses principales zones}
+        \label{fig:calibratedSomWithZone}
+    \end{figure}
+
+    % Description des zones
+    % Les zones qui ont les stéroïdes les plus fortes
+    % Pour chaque zone
+        % Quelles sont les catégories de stéroide de cette zone?
+        % Quelles sont les stéroïdes les plus représentantes de cette zone?
+
+    % TODO : Changer minéralcorticoïde en minéralocorticoïdes
+    % TODO : Corriger "Table" dans la légende et "Tableau" dans le texte
+    % TODO : Checker l'excel du tableau all_zones
+
+    Pour quantifier l'activité des stéroïdes, nous avons appliqué une méthode d'évaluation selon \autoref{sct:quantification}. Le score permet de voir rapidement quelle est la catégorie de stéroïde dont les activités sont les plus fortes.
+
+    Les moyennes des stéroïdes du \autoref{tab:som_all_zone} nous montrent que la zone 4 est la plus active. Cette dernière bénéficie de la plus grande diversité stéroïdienne et on voit qu'elle réunit les oestrogènes. Il est intéressant d'observer la zone 2. Cette dernière ne comporte que peu de stéroïdes, mais leurs activités sont fortes et isolées du reste. Les annexes \autoref{sct:steroidActivityByZone} fournissent les tableaux détaillés de l'activité des stéroïdes présente dans chacune des zones.
+
+    En plus de nous fournir les scores des catégories de stéroïdes, le \autoref{tab:table_som_all_zones} nous informe sur les interactions entre catégories de stéroïdes. On constate que la zone 4 est celle qui bénéficie du plus d'interactions entre catégories.
+
+    La zone 1 est majoritairement représentée par les glucocorticoïdes précurseurs et glucocorticoïdes. Elle n'interagit que peu avec les autres catégories de stéroïdes. Les zones 2 et 3 sont bien représentées par les minéralocorticoïdes. La zone 5 est celle qui possède les glucocorticoïdes les plus présents.
+
+    Finalement, on constate que les glucocorticoïdes et glucocorticoïdes précurseurs sont souvent ensemble, de la même manière que les androgènes et androgènes précurseurs. Ces quatre dernières catégories forment des groupes dans les zones 1 et 4. 
+
+    \begin{table}[H]
+        \centering
+        \input{table/table_som_all_zones}
+        \caption{Activité des catégories de stéroïdes pour chaque zone - Les scores sont nuls lorsqu’une catégorie a le score minimum de sa zone.}
+        \label{tab:som_all_zone}
+    \end{table}
+
+    % TODO: Colorer les lignes selon les catégories de stéroïdes dans le tableau som_all_zone
+    % TODO: Si assez de temps, expliquer quelles sont les stéroïdes qui connectent plusieurs zones.
+
+\subsubsection*{Stéroïdes corrélés}
+    
+    % Parmis ces zones certaines stéroïdes sont corrélées
+        % l'activité des stéroïdes est majoritairement peu élevée
+        % en regardant les cp, on voit 6 groupes corrélés dont un qui est composé de 19 stéroïdes corrélées que l'on peut séparé en 6 sous-groupes.
+        % Pour plus de détails voir figure XX
+
+        % Corrélations dans une même catégorie de stéroïdes
+            % Il y a-t-il des catégories sur plusieurs zones
+            % Quelles sont les zones qui représesentée que par un
+
+    Au point précédent, nous avons vu que les zones d'activité de la SOM sont composées de stéroïdes plus ou moins actifs. Cette section complète la précédente en comparant les patterns des composants planaires. La comparaison de ces derniers permet de déceler les corrélations globales et partielles en prenant en compte l'influence de l'ensemble des stéroïdes.
+
+    Pour représenter les corrélations entre stéroïdes, nous nous sommes inspiré de la représentation en arbre selon \cite{Barreto-Sanz:2011}. Sur les \autoref{fig:calibratedCp1, fig:calibratedCp2}, les componsant planaires des stéroïdes ont été séparés en 6 classes de A à F. La classe C est divisée en 6 sous-classes de a à f. Chacune de ces classes représente un ensemble de stéroïdes corrélés, respectivement un sous-ensemble pour les sous-classes de C.
+    
+    Le premier constat de l'observation de l'arbre des corrélations est que l'activité stéroïdienne est peu élevée. La majorité des composants planaires ont une teinte dominante bleue et il n'y a pas de stéroïdes qui divisent les données en deux de manière très claire. Dans les six groupes relevés, on constate que le groupe C est celui où l'on trouve le plus de stéroïdes corrélés. Les zones 1 et 4 de la U-Matrix sont souvent activées de paire dans cette classe, ce qui est bien visible en observant les composants planaires. Sur le \autoref{tab:somCorrelation}, on lit le détail de la classe C où la majorité des corrélations sont des glucocorticoïdes. Les autres classes corrélées sont plus petites, mais restent informatives. La classe A nous montre 2 minéralcorticoïdes très actifs et corrélés. Ce sont ces derniers qui, à eux seuls, créent la zone 2 de la U-Matrix. Dans la classe B, on remarque une corrélation entre 2 stéroïdes aux activités fortes, un minéralcorticoïde et un glucocorticoïde précurseur (cr\_thaldo\_d avec cr\_pt\_one\_d). La classe D nous montre que les oestrogènes sont corrélés avec un l'androgène cr\_testosterone\_d et le minéralcorticoïde cr\_l8\_oh\_tha\_d.
+
+    Quant aux corrélations partielles, on en observe entre la classe C et D dans le cadran 4 de la U-Matrix.  
+
+    % TODO: Mettre qqch en plus à propos des corrélations partielles...
+
+    Finalement, dans la \autoref{fig:calibratedCp2}, on voit que certains stéroïdes ne sont corrélés avec aucune autre. C'est le cas du cr\_a\_cortol\_d qui a une activité très locale. C'est ce stéroïde qui est responsable de la ``bulle'' située entre les zones 2,3 et 5 de la U-Matrix. 
+
+
+    \begin{figure}[H]
+        \begin{subfigure}[b]{\textwidth}
+            \centering
+            \includegraphics[width=0.9\textwidth,keepaspectratio]{img/custom/09_steroid_calibrated_component_planes_by_zone_01.png}    
+            \caption{Arbre des component planes - Partie 1}
+            \label{fig:calibratedCp1}
+        \end{subfigure}
+
+        \begin{subfigure}[b]{\textwidth}
+            \centering
+            \includegraphics[width=0.9\textwidth,keepaspectratio]{img/custom/09_steroid_calibrated_component_planes_by_zone_02.png}    
+            \caption{Arbre des component planes - Partie 2}
+            \label{fig:calibratedCp2}
+        \end{subfigure}
+
+        \caption{Component planes de la SOM calibrée}
+        \label{fig:calibratedCpTree}
+    \end{figure}
+
+\subsection{Self-Organizing Maps colorées postérieurement}
+\label{sct:coloredSOM}
+
+    % TODO : Vérifier la mise en page de cette section.
+
+    % Le rôle d'ajouter une var externe est de donner un biais vers la var qu'on ajoute pour le calcul de la SOM.
+    % Les figures de gauches sont des coloration de la SOM de stééroïdes uniquement
+    % Les figures de droites sont des coloration avec le biais.
+
+    % Attention au 2 initialisations différentes
+    % La carte de gauche peut être comparée à la U-Matrix et aux composants planaires de la section précédente
+    % La carte de droite sert uniquement de comparaison à la carte de gauche.
+        % La comparaison se fait en observant les facteurs suivants:
+            % Il y a-t-il un même type de séparation
+
+    La coloration des SOM est faite selon la méthode de la \autoref{sct:postColoration}. L'ajout d'une variable externe dans le calcul de la SOM permet de forcer sa convergence en fonction de la variable choisie. 
+
+    Dans cette section, les figures de gauche sont les SOM colorées basées sur la SOM de la section précédente. Les figures de droite sont les SOM colorées auxquelles la variable étrangère a été ajoutée. Cet ajout a nécessité le calcul d'une nouvelle SOM. Vu que l'emplacement des neurones des SOM est initialisé aléatoirement, l'aspect final des cartes est différent. De ce fait, les répartitions des points ne sont pas similaires. Étant donné ce biais, la comparaison des 2 cartes sera limitée.
+
+    La comparaison sera divisée en deux parties. La première est commune à toutes les SOM colorées, la deuxième est propre à la paire de SOM colorée selon une variable.
+
+\subsubsection*{Comparaisons communes}
+
+    \begin{description}
+
+    \item[Faible concentration]
+    On remarque immédiatement que les SOM semblent avoir des valeurs éparses vu la concentration de leurs points. Ceci est dû à la dimension de la carte de Kohonen choisie cf. \autoref{sct:calibratedSOM}. Néanmoins, une telle concentration n'est pas un facteur gênant pour l'obtention du résultat désiré. C.-à-d. confirmer si les données uniquement stéroïdiennes permettent la distinction d'une variable choisie.
+
+    \item[Neurones périphériques]
+    Les neurones semblent se placer sur la périphérie des SOM colorée. Il est difficile de savoir quelle est la cause d'un tel placement. On suppose que la carte de Kohonen avec le format d'un plan n'est pas le plus adapté pour la représentation du dataset.
+
+    \item[Meilleure division]
+    Les SOM colorées avec la variable étrangère (à droite) montrent des meilleures séparations. Cela est dû à l'effet de la variable étrangère qui participe à la division du dataset.
+
+    \end{description}
+
+\subsubsection*{Sexe}
+    
+    Sur les SOM de la \autoref{fig:sexComp}, la coloration est faite selon le sexe des patients. Les femmes sont colorées en rose et les hommes en bleu. 
+
+    Chacune des SOM est bien divisée. Au niveau stéroïdien, les genres sont donc bien représentés dans le dataset. Bien que moins claire sur la \autoref{fig:withoutSex}, le nombre de zones semble être similaire sur les 2 cartes. Un groupe d'homme isolé est visible en haut à gauche de la \autoref{fig:withoutSex} et en bas à droite de la \autoref{fig:withSex}.
+
+    La concentration des patients semble être plus forte dans la partie inférieure de la SOM \autoref{fig:withoutSex}, ce qui est également le cas dans la partie de droit de la SOM avec sexe.
+
+    \begin{figure}[H]
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{img/custom/sex.png}    
+            \caption{Stéroïdes uniquement}
+            \label{fig:withoutSex}
+        \end{subfigure}
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{img/10_sex_augmented.png}
+            \caption{Stéroïdes et sexe}
+            \label{fig:withSex}
+        \end{subfigure}
+        \caption{Comparaison des SOM colorées selon le sexe}
+        \label{fig:sexComp}
+    \end{figure}
+
+\subsubsection*{Âge}
+
+    Sur ces SOM, l'âge a été colorié. Sans surprise, les âges sont plus mélangés sur la SOM \autoref{fig:withoutAge}. Toutefois, chez les patients d'âge supérieur à 50 ans coloriés en bleu, on remarque deux zones bien distinctes. Dans le quart supérieur gauche, plusieurs catégories d'âges différents sont mélangées.
+
+    % TODO : Ajouter une majuscule à Age de la légende de la SOM et y agrandir les légendes.
+
+    \begin{figure}[H]
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{img/custom/age.png}    
+            \caption{Stéroïdes uniquement}
+            \label{fig:withoutAge}
+        \end{subfigure}
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{img/10_age_augmented.png} 
+            \caption{Stéroïdes et âge}
+            \label{fig:withAge}
+        \end{subfigure}
+        \caption{Comparaison des SOM colorées selon l'âge}
+        \label{fig:ageComp}
+    \end{figure}
+
+\subsubsection*{BMI}
+    
+    Sur les deux SOM de la \autoref{fig:bmiComp}, les indices de masse corporelle (BMI) sont représentés. Pour rappel, le BMI est un indice qui permet l'estimation de la corpulence d'une personne. Son calcul s'effectue de la manière suivante: $$BMI = \frac{masse}{taille^2}$$ où la masse est en kilogrammes et la taille en mètres. Les différentes catégories de BMI sont visibles dans le \autoref{tab:bmiCategories}.
+
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Catégorie}    & \textbf{BMI}              \\
+    \midrule
+    Sous-poids            & \textless\thinspace18.50           \\
+    Poids normal          & 18.5 - 24.99              \\
+    Surpoids              & 25.00 - 29.99             \\
+    Obèse                 & \textgreater\thinspace30.00        \\
+    \bottomrule
+    \end{tabular}
+    \caption{Catégorie de l'indice de masse corporelle (BMI) selon \cite{OMS:BMI}}
+    \label{tab:bmiCategories}
+    \end{table}
+
+    Il est difficile de se prononcer sur la SOM \autoref{fig:withoutBmi}. Les patients aux BMI élevés semblent être situés dans les bords de la carte. Dans ces zones, la concentration de point aux teintes rouge foncées légèrement plus élevée qu'ailleurs. Si la présence de ces zones est avérée, ceci correspondrait aux zones rouges visibles dans la \autoref{fig:withBmi}. 
+
+    \begin{figure}[H]
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{img/custom/bmi.png}    
+            \caption{Stéroïdes uniquement}
+            \label{fig:withoutBmi}
+        \end{subfigure}
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{img/10_bmi_augmented.png}    
+            \caption{Stéroïdes et BMI}
+            \label{fig:withBmi}
+        \end{subfigure}
+        \caption{Comparaison des SOM colorées selon le BMI}
+        \label{fig:bmiComp}
+    \end{figure}
+
+\subsubsection*{Pression artérielle diastolique}
+
+    La pression artérielle diastolique est mesurée lorsque le muscle cardiaque est en phase de relâchement. Les catégories de pression artérielle diastoliques sont présentées dans le \autoref{tab:dbpCategories}. Sur la \autoref{fig:withoutDbp}, les patients aux pressions artérielles diastoliques inférieures à une pression normale ne sont pas représentés. Ceux avec une pression artérielle supérieure au niveau II sont coloriés en noir. Ceci permet de se focaliser sur les patients d'intérêt, c.-à-d. les patients hypertendus.
+
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Catégorie}    & \textbf{Pression diastolique (mmHg)}    \\ 
+    \midrule
+    Normal                & \textless\thinspace80                            \\
+    Pré-hypertension      & 80 - 89                                 \\
+    Niveau I              & 90 - 99                                 \\
+    Niveau II             & \textgreater\thinspace100                        \\ 
+    \bottomrule
+    \end{tabular}
+    \caption{Catégorie de pression artérielle diastolique (DBP) selon \cite{NCBI:BPClassification}}
+    \label{tab:dbpCategories}
+    \end{table}
+    
+    Malgré le travail de coloration des patients et l'ajustement de l'échelle, la distinction de la pression artérielle diastolique dans l'ensemble des stéroïdes est difficile sur la \autoref{fig:withoutDbp}. Toutefois, il semblerait que trois groupes soit présents. Quant à la \autoref{fig:withDbp}, ses patients ont été mieux divisés selon deux groupes.
+
+    \begin{figure}[H]
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{img/custom/dbp.png}    
+            \caption{Stéroïdes uniquement}
+            \label{fig:withoutDbp}
+        \end{subfigure}
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{img/10_dbp_24_c_m_augmented.png}    
+            \caption{Stéroïdes et dbp\_24\_c\_m}
+            \label{fig:withDbp}
+        \end{subfigure}
+        \caption{Comparaison des SOM colorées selon dbp\_24\_c\_m}
+        \label{fig:dbpComp}
+    \end{figure}
+
+\subsubsection*{Pression artérielle systolique}
+
+    La pression artérielle systolique est mesurée lorsque le muscle cardiaque se contracte. Les catégories de pression artérielle systoliques sont présentées dans le \autoref{tab:sbpCategories}. Les patients ont été colorés selon la même logique que dans la section précédente. L'échelle a été adaptée à la pression systolique plus élevée. Sur la \autoref{fig:withoutSbp}, les patients avec une pression normale ne sont pas représentés. Ceux avec une pression artérielle supérieure au niveau II sont coloriés en violet.
+
+    \begin{table}[H]
+    \centering
+    \begin{tabular}{@{}ll@{}}
+    \toprule
+    \textbf{Catégorie}    & \textbf{Pression systolique (mmHg)}    \\
+    \midrule
+    Normal                & \textless\thinspace120                           \\
+    Pré-hypertension      & 120 - 139                               \\
+    Niveau I              & 140 - 159                               \\
+    Niveau II             & \textgreater\thinspace160                        \\
+    \bottomrule
+    \end{tabular}
+    \caption{Catégorie de pression artérielle systolique (SBP) selon \cite{NCBI:BPClassification}}
+    \label{tab:sbpCategories}
+    \end{table}
+
+    Les constats à propos de la \autoref{fig:CompSbp} sont similaires à ceux de la \autoref{fig:dbpComp}, la division semble toutefois un peu plus net ici.
+    
+    \begin{figure}[H]
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{img/custom/sbp.png}    
+            \caption{Stéroïdes uniquement}
+            \label{fig:withoutSbp}
+        \end{subfigure}
+        \begin{subfigure}[b]{.5\textwidth}
+            \centering
+            \includegraphics[width=\textwidth,keepaspectratio]{img/10_sbp_24_c_m_augmented.png}s            \caption{Stéroïdes et sbp\_24\_c\_m}
+            \label{fig:withSbp}
+        \end{subfigure}
+        \caption{Comparaison des SOM colorées selon le sbp\_24\_c\_m}
+        \label{fig:CompSbp}
+    \end{figure}
+
+
+\subsection{Récapitulatif des SOM colorées}
+    
+    La \autoref{fig:colored_andumatrix} résume les principaux axes de séparation des patients selon les SOM colorées ci-dessus. Pour chacune des zones dans le tableau \autoref{tab:recapitulatifColoredSOM}, nous avons regardé quels y étaient les patients associés.
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{img/custom/somWithColoredSomZones.png}    
+        \caption{Association des colorations de SOM avec la U-Matrix}
+        \label{fig:colored_andumatrix}
+    \end{figure}
+
+    \begin{table}[H]
+        \centering
+        \input{table/table_recap_colored_som}
+        \caption{Tableau récapitulatif des SOM colorées}
+        \label{tab:recapitulatifColoredSOM}
+    \end{table}
+
+

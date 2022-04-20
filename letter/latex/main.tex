@@ -1,0 +1,72 @@
+\documentclass{chletter}
+
+
+\usepackage[frenchb]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[no-math]{fontspec}
+\fontsize{10}{10}
+\fontspec{Trade Gothic LT Std}
+\setmainfont{Trade Gothic LT Std}[
+   Ligatures = TeX, % To support LaTeX quoting style
+   BoldFont = {Trade Gothic LT Std Bold No. 2},
+   ItalicFont = {Trade Gothic LT Std Light Oblique},
+   BoldItalicFont = {Trade Gothic LT Std Bold No. 2 Oblique},
+]
+\setmonofont{Source Code Pro}% For the code
+%\newfontface\textmd{Trade Gothic LT Std Regular}
+
+\def\encl{Annexes : }
+\def\cc{Copie à : }
+
+
+\author {Jake Smith}
+\address{
+          Avenue des Alpes 1\\
+          1000 Lausanne
+        }
+
+\date{Lausanne, le \today}
+
+% Titre
+\title{\textbf{
+Concerne: Changement de primes et factures
+}}
+
+\begin{document}
+
+% Adresse du récepteur
+\begin{letter}{
+            Groupe Mutuel\\
+            Rue des Cèdres 5\\
+            Case Postale\\
+            1919 Martigny
+              }
+
+\object
+
+% Ouverture
+\opening{Madame, Monsieur}
+
+% Corps
+Je souhaiterai changer le montant de ma franchise de 300.- CHF à XXX.- CHF.
+Egalement, je vous joins les factures suivantes pour que vous puissiez me rembourser: 
+\begin{itemize}
+  \item Facture 1
+  \item Facture 2
+\end{itemize}
+
+% Salutations
+\closing{
+  En vous remerciant d’avance pour vos nouvelles, je vous prie d’agréer, Madame, Monsieur, l’expression de mes sentiments distingués.
+}
+
+
+% Annexes
+%\encl{Billet de passage}
+
+% Copie à
+%\cc{John Smith}
+
+
+\end{letter}
+\end{document}

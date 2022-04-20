@@ -1,0 +1,83 @@
+% =============================================================================
+\chapter{Méthodes}
+% ============================================================================= 
+    
+    % TODO : Expliquer le "pourquoi" des points principaux de la méthodes. Ce qu'on veut montrer en fonction de la méthode appliquée, l'objectif.
+
+    Pour aborder la recherche de corrélations dans le dataset de stéroïdes, une approche ``top-down'' a été choisie. Après une étape de nettoyage des données, nous avons obtenu une vue globale sur le dataset grâce à une matrice de corrélation. Ensuite, nous nous sommes concentrés sur les corrélations partielles en utilisant les Self-Organizing Maps (SOM) et leurs composants planaires. 
+
+
+    \begin{javacode}
+        public class Fibonacci {
+
+          // The golden ratio $\phi = \frac{1 + \sqrt{5}}{2}$.
+          public static final double PHI = (1.0 + Math.sqrt(5.0)) / 2.0;
+
+          public static double fibonacci(long n) {
+            if (n &lt; 0) throw new IllegalArgumentException();
+            return Math.floor(Math.pow(PHI, n) / Math.sqrt(5.0) + 0.5);
+          }
+
+        }
+    \end{javacode}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=0.5\textwidth]{./asset/img/custom/10_bmi_no_color_scale.png}    
+        \caption{SOM colorée non lisible du fait du domaine de l'échelle sans prise en compte de la nature de la donnée à représenter et d'une colormap inadaptée}
+        \label{fig:unreadableColoredSom}
+    \end{figure}
+
+    Pour avoir une vue d'ensemble des corrélations entre stéroïdes, nous avons fait une matrice des corrélations de Pearson. Étant donné la difficulté de lecture visuelle, nous avons mis en évidence les plots significatifs en vert et non significatifs en rouge. Une corrélation est considérée comme significative si sa P-valeur est inférieure à 5\% corrigée selon la correction de Bonferroni. \cite{Dunn:1959}\cite{Dunn:1961} Soit, $$P_{max} = \frac{0.05}{(n^2-n)/2}$$
+
+    \begin{conditions}
+    P_{max} & P-valeur maximum \\
+    n & nombre de stéroïdes
+    \end{conditions}
+      %TODO : Gls SOM
+
+    \subsection{Développement}
+    \label{sct:dev}
+    % Implémentation de la SOM
+    % Implémentation des composants planaires
+    % Implémentation de l'outil de calibration
+
+    L'implémentation des outils nécessaires pour la recherche de corrélations partielles a été faite en Python 2.7.11 fourni avec la distribution Anaconda 2.5.0 (x86\_64). Ce choix a été fait car Python est le language utilisé dans l'institut CI4CB. Plusieurs packages ont été utilisés, notamment le package \mintinline{python}{kohonen} qui nous a fourni une base d'implémentation.
+
+    Deux outils de visualisation de la carte de Kohonen ont été implémentés :   
+
+    \begin{enumerate}
+        \item la U-Matrix en réutilisant un code existant 
+        \item les composants planaires de chaque variables
+    \end{enumerate}
+
+
+
+    \begin{listing}[H]
+    \begin{pythoncode}
+    class SOM:
+        def __init__(self, matrix, variables, params)
+        def computeUMatrix(self, kmap)
+        def constructSamplesForNeurons(self, kmap, matrix)
+        def getUMatrix(self, samples=False)
+        def getComponentPlanes(self)
+        def getErrorPlot(self)
+    \end{pythoncode}
+    \caption{Signatures des méthodes de la classe SOM}
+    \label{lst:somClass}
+    \end{listing}
+
+    \begin{listing}[H]
+    \begin{pythoncode}
+    params = {
+                'n_iter' : 20, 
+                'x' : 20,
+                'y' : 20,
+                'dimension' : len(attributes),
+                'learning_rate' : (0.2, 0.05),
+                'neighborhood_size' : (2./3*20, 1) 
+            }
+    \end{pythoncode}
+    \caption{Exemple de contenu de la variable \mintinline{python}{params} nécessaire pour le constructeur d'un objet SOM}
+    \label{lst:somParams}
+    \end{listing}

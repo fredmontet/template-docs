@@ -1,0 +1,233 @@
+% =============================================================================
+\chapter{Analyses}
+		% Dataset -> Est-ce que ça vaut vraiment la peine de mettre ça?
+			% On a vu qu'il y avait beaucoup de données manquantes
+			% On va pouvoir investiguer pour trouver la méthode la moins déstructive pour éxploiter au mieux le dataset.
+% =============================================================================
+
+% What do your observations mean?
+% What conclusions can you draw?
+
+% For each major result:
+% 	- Describe the patterns, principles, relationships your results show.
+% 	- Explain how your results relate to expectations and to literature cited in your Introduction.
+%     Do they agree,  contradict, or are they exceptions to the rule?
+% 	- Explain plausibly any agreements, contradictions, or exceptions.
+% 	- Describe what additional research might resolve contradictions or explain exceptions.
+
+
+% How do your results fit into a broader context?
+% 	- Suggest the theoretical implications of your results.
+% 	- Suggest practical applications of your results?
+% 	- Extend your findings to other situations or other species.
+% 	- Give the big picture: do your findings help us understand a broader topic?
+
+
+% Additional tips:
+%	- Move from specific to general: your finding(s) --> literature, theory, practice.
+% 	- Don't ignore or bury the major issue. Did the study achieve the goal (resolve the problem, answer the question, support the hypothesis) presented in the Introduction?
+%	- Make explanations complete.
+%	- Give evidence for each conclusion.
+%	- Discuss possible reasons for expected and unexpected findings.
+
+% What to avoid:
+%	- Don't overgeneralize.
+%	- Don't ignore deviations in your data.
+%	- Avoid speculation that cannot be tested in the foreseeable future.
+
+
+% -----------------------------------------------------------------------------
+\section{Corrélations}
+% -----------------------------------------------------------------------------
+
+\subsection{Matrice de corrélations}
+
+	% Matrice de corrélation
+		% Corrélations pas uniquement dans une même catégorie
+		% Cluster de stéroides dans les même catégories 
+		% Stéroïdes moins corrélées entre catégories
+
+	Le résultat de l'analyse des corrélations globales nous a permis de visualiser l'ensemble des interactions entre stéroïdes du dataset.
+
+	Grâce à la matrice de corrélation \autoref{fig:colored_matrix} et ses deux variantes, \autoref{fig:pearson_matrix} et \autoref{fig:pvalue_matrix}, nous avons mis en évidence que les corrélations n'existent pas uniquement au sein d'une même catégorie, mais qu'il y en a également entre catégories. 
+
+	% TOOO: écrire pourquoi qu'on s'attendait à ces correlations et pas à celles en dehors
+	% TODO: approfondir l'analyse
+
+	L'ordre par catégorie biologique selon lequel les stéroïdes ont été placés le long des axes de la matrice de corrélation a permis deux constats. D'une part, nous avons relevé la présence de petits clusters de stéroïdes corrélés au sein d'une même catégore. D`autre part, nous avons remarqué que les corrélations entre catégories sont plus focalisées sur un stéroïde précis.
+
+\subsection{SOM et component planes}
+	
+	% Division de la SOM en 5
+	
+	% Activité différentes selon les zones
+		% En appliquant la méthode d'évaluation, on a trouvé
+			% Les catégories de stéroïdes présentent dans chaques zones
+			% Faire un ranking de l'activité des catégories de stéroïdes pour chaque zones
+
+	Les SOM et component planes ont permis de mettre en valeurs la présence de cinq zones composées de différents stéroïdes. L'activité de ces zones a pu être quantifiée suite à l'évaluation de l'activité de chacun des stéroïdes. Puis, regrouper ces évaluations a fait ressortir les catégories de métabolites les plus actives pour chaque zone.
+
+	% Stéroïdes corrélées
+		% En classant les CP en observant les patterns similaires on a pu construire l'arbre selon lequel il y a 6 catégories de corrélations
+		% On a pu classer les stéroïdes corrélées dans un tableau et elles sont maintenant 	divisée par catégorie.
+
+	Quant aux component planes, ces derniers ont permis l'observation de six classes de corrélations entre stéroïdes. Une de celles-ci, la classe C, comporte une majorité de stéroïdes et a pu être divisée en six sous-classes. Une représentation en arbre a été faite et deux tableaux classent les corrélations selon la catégorie des stéroïdes.
+
+\subsection{SOM colorées}
+		
+	% Comparaison difficile
+	% Sex bien représenté uniquement avec des stéroïdes
+	% Age bien représenté uniquement avec les stéroïdes
+	% BMI moyennement bien représenté
+	% SBP et DBP pas bien représenté
+		% Les moyennes ne sont probablement pas les bonnes variables à prendre car elles "gomment" les mesures hypertendues.
+	
+	La coloration des SOM nous a montré qu'un dataset basé uniquement sur des stéroïdes peut permettre la distinction de groupes de patients selon une variable étrangère. Les résultats de la \autoref{sct:coloredSOM} ont montré une bonne distinction de l'âge et du sexe. La distinction du BMI est moyenne et celle des pressions artérielles diastolique et systolique moyennes sur 24h sans outliers sont mauvaise.
+
+	Pour chacune des variables étrangères colorées, deux SOM ont été comparées. La première a été calculée uniquement d'après le dataset de stéroïdes, la deuxième en lui rajoutant la variable étrangère. Comme attendu, l'ajout de cette variable permet une meilleure séparation des patients. De plus, la variable supplémentaire nous a permis de valider les séparations uniquement stéroïdiennes lorsque les cas se sont présentés. Lorsque la séparation du dataset stéroïdien n'est pas évidente, la SOM ``dopée'' nous a mis sur des pistes. Cependant, lorsque la répartition des patients est plutôt homogène comme pour les SOM colorées selon les pressions artérielles diastoliques et systoliques, la comparaison entre SOM apporte de la confusion. 
+
+	Dans le cas de pressions artérielles citées ci-dessus, ces dernières ont été moyennées sur 24h. L'effet de cette moyenne pourrait avoir atténué la création de groupe à notre défaveur.
+	% Les moyennes ne sont pas les bonnes var.
+
+% -----------------------------------------------------------------------------
+\section{Réponse à la problématique}
+	% Différences entre les correlations partielles et globales 
+		% Raison bio, differentes routes
+		% Raison experimentales
+		% Cycle circadien
+			% 6:45 blood pressure rise 
+			% 9:00 highest testosterone secretion
+
+	% Corrélations
+		% Futures analyses cliniques
+			% Bonne representation du dataset steroidien
+			% Pistes de recherchent "pre-machee"
+% -----------------------------------------------------------------------------
+
+	Les analyses globales et partielles ont montré la présence de groupes corrélés au sein du dataset de stéroïdes. Dans la matrice de corrélation, nous avons vu ces groupes sous la forme de petits clusters de stéroïdes. Dans les component planes, ces groupes sont représentés par les différentes classes de l'arbre des corrélations à la \autoref{fig:calibratedCpTree}. 
+
+	Dès lors, nous pouvons nous poser les questions suivantes: est-ce que l'utilisation des matrices de nuages de points et des SOM nous a permis d'obtenir la meilleure compréhension du rôle des stéroïdes sur l'HTA? Avons-nous donné des pistes de recherche pour le domaine clinique?
+
+	Nous pensons que la première question a été répondue. D'une part, les SOM colorées nous ont montré la possibilité de reconnaitre une variable étrangère dans un dataset uniquement stéroïdien. Avec un travail d'analyse supplémentaire, il serait possible de caractériser un patient en observant uniquement ses données stéroïdiennes. D'autre part, les analyses de corrélation nous ont montré qu'il existait bel et bien des interactions dans le dataset. 
+
+	La réponse à la deuxième question est également positive. L'investigation des corrélations par un où une spécialiste en biologie permettrait de mieux comprendre les influences de chacune des corrélations dans les résultats obtenus. Si des différences entre nos analyses globales et partielles sont trouvées, les sources de ces différences peuvent être d'origine biologique ou expérimentale. Il pourrait par exemple s'agir d'un problème lié au rythme circadien. Chaque patient ayant sa propre horloge interne, les variations de pressions artérielles diurnes et nocturnes n'auront pas lieu à la même heure. Ceci est d'autant plus valable lorsqu'il s'agit de patient hospitalisé dont le cycle de sommeil aura été perturbé. Si par contre aucune différence n'est trouvée entre nos deux analyses, cela implique que les stéroïdes peuvent être comparée une à une, c.-à-d. uniquement à l'aide d'une matrice de corrélation. L'utilisation d'une SOM ne serait alors pas justifiée.
+
+
+	% Est-ce que les résultats sont différents entre matrice de corrélation et SOM?
+		% Si oui cela veut dire que les stéroïdes s'influencent entre elles
+			% Alors il ne faut pas les comparer une à une, il faut les considerer comme un tout. La SOM est adaptée.
+			% Raison bio, differentes routes
+			% Raison experimentales
+			% Cycle circadien
+				% 6:45 blood pressure rise 
+				% 9:00 highest testosterone secretion
+		% Si non cela veut dire que les stéroïdes ne s'influencent pas entre elles
+			% La matrice de corrélation est donc suffisante
+
+	%TODO citer un paper qui atteste que le cycle circadien est perturbé par un cycle de sommeil perturbé.
+
+% -----------------------------------------------------------------------------
+\section{Aspects techniques}
+	% Calibration SOM
+		% Pour une même neighborhood et une même learning rate
+			% plus la carte est grande plus l'erreur baisse
+			% plus le nombre d'itération augmente, plus l'erreur baisse
+		% Que la LR a une grande influence sur l'erreur
+			% Dans notre cas, le choix de la distance cosine 
+		% Qu'une neighborhood trop petite n'est pas adaptée (à justifier)
+% -----------------------------------------------------------------------------
+
+	Le développement d'une carte auto-organisée calibrée pour le dataset de stéroïde a donné lieu à une phase de calibration \autoref{sct:calibration} et à la création d'un indice d'erreur \autoref{sct:errorIdx}. Cette phase nous a apporté une vue critique sur les paramètres qui permettent la création d'une SOM afin qu'elle soit représentative d'un dataset. %Soit la dimension de la carte de Kohonen, le nombre d'itération de calcul, la learning rate et le neighborhood size.
+
+	Nous avons compris qu'au fur et à mesure de l'augmentation de la taille de la SOM et du nombre d'itérations de calcul, l'erreur baisse et converge vers un seuil. Ainsi, l'optimisation de la dimension de la SOM et de ses itérations permet de choisir des paramètres où la variation de l'erreur est insignifiante. 
+
+	Deux autres paramètres doivent également être pris en considération: la learning rate et le neighborhood size. La learning rate détermine la correction de position du vecteur d'un neurone $m_i$ au fur et à mesure des étapes d'une itération de calcul. Le neighborhood size représente le voisinage impacté par la correction de position de $m_i$. 
+
+	La learning rate et le neighborhood size ne sont pas triviaux à régler, un mauvais choix peut amener à une SOM d'apparence représentative, c.-à-d. avec un indice d'erreur final bas, d'avoir convergé vers un minimum local. Le déplacement d'un neurone vers un des vecteurs de stéroïdes est défini par : $$m_i(t+1) = m_i(t)+\alpha_i(t)h_{ci}[x(t) - m_i(t)]$$ où $\alpha_i(t)$ est la learning rate, $h_{ci}$ le neighborhood size et $x(t)$ le vecteur d'exemple. Au fur et à mesure des itérations, $\alpha_i(t)$ et $h_{ci}$ décroissent selon une fonction exponentielle. Cette fonction permet à la carte de Kohonen de ``s'étaler'' sur l'ensemble du dataset pour autant que les valeurs initiales $\alpha_i(0)$ et $h_{ci}(0)$ le permettent. Le choix de $\alpha_i(0)$ et de $h_{ci}(0)$ implique la recherche d'un compromis pour que les neurones de la carte de Kohonen puissent explorer suffisamment au début des itérations de calcul et qu'ils se positionnent de manière fidèle au dataset à la fin de la calculation.
+
+	Les heuristiques et exemple de carte de Kohonen consultés se basent souvent sur la distance euclidienne. Vu que notre choix de distance est la similarité cosinus, l'utilisation de notre indice d'erreur pour trouver une SOM idéale est justifiée. Cependant, cet indice est incomplet. Il ne prend pas en compte l'étalement de la carte sur les données. Par exemple, dans le cas ou $h_{ci}(0)$ est trop petit, l'erreur finale sera basse, car la carte convergera dans un sous-set du dataset. C'est pourquoi la taille de neighborhood initiale de $h_{ci}(0) = 1/2*max(m, n)$ où $(m, n)$ sont les dimensions de la SOM, a été choisie selon les conseils de Kohonen \cite{Kohonen:1995}.
+
+	% TODO: Mettre référence des exemples consultés
+
+% -----------------------------------------------------------------------------
+\section{Imprécisions}
+	% Mesures
+	% Bruit
+	% Matrice de corrélation
+		% Avantage
+			% facile à mettre en place
+		% Désavantage
+			% Fastidieux à la lecture
+			% Comparaison sans prise en compte de la globalité du dataset
+	% Calibration SOM
+		% Citer le graphe d'erreur de la som idéale et le discuter (valeur d'erreur bonne ou mauvaise?, etc.)
+		% Calcul de la valeur d'erreur sans prise en compte de la répartition des neurones sur l'ensemble du dataset
+		% Faire un code multithread pour faire inclure learning rate et neighborhood size
+% -----------------------------------------------------------------------------
+
+	Il ne faut pas oublier que les analyses des corrélations globales et partielles faites dans ce rapport sont sujettes à plusieurs biais. La chaine d'analyse, de la récolte d'urine chez le patient jusqu'à la génération de la SOM, donne lieu à de multiples étapes ou une erreur humaine peut avoir lieu. Il faut également mentionner que suivant les stéroïdes mesurés, certaines ont des valeurs assez faibles. Un bruit de mesure est donc plus à même de perturber ladite mesure. 
+
+	Concernant les outils utilisés dans l'analyse globale, la matrice de corrélation à l'avantage d'être facile à mettre en place, mais est fastidieuse à la lecture. De plus, elle ne prend pas en compte la globalité du donnée dans l'analyse des corrélations. En effet, les stéroïdes sont comparés un à un, ce qui n'est pas représentatif des interactions partielles qui peuvent avoir lieu en réalité. 
+
+	En ce qui concerne les SOM, il faut être conscient que même avec la procédure de calibration de ce rapport, la SOM pourrait ne pas être aussi représentative du dataset qu'elle ne le devrait. Le graphique de courbe d'erreur \autoref{fig:calibratedSomError} nous donne uniquement une indication des distances minimales aux neurones. Cette mesure ne nous donne pas d'indication sur la répartition de la SOM sur l'ensemble du dataset. 
+
+
+% -----------------------------------------------------------------------------
+\section{Perspectives futures}
+	% Comparaison des méthodes d'imputation
+	% Som hexa -> mieux pour analyse visuelle
+	% Même chose pour la nuit
+% -----------------------------------------------------------------------------
+	
+	% TODO : Vérifier la mise en page une fois la discussion terminée
+
+	Les points à approfondir pour continuer ce travail pourraient se faire sur 2 plans: technique et clinique. Dans cette section, deux listes sont proposées pour poursuivre les recherches selon ces plans.
+
+\subsection*{Plan technique}
+	
+	\begin{description}
+	\item[Méthode d'imputation]
+	une comparaison des différentes méthodes d'imputations devrait être faite pour choisir celui qui permet la meilleure exploitation du dataset. Les solutions de remplacement à comparer pourraient utiliser des méthodes comme: K-NN, moyenne, médiane, etc.
+
+	% TODO: revoir les noms des méthodes 
+
+	\item[SOM hexagonal]
+	Pour faciliter l'inspection visuelle des SOMs, l'implémentation d'un treillis hexagonal apporterait de meilleurs résultats que le treillis ``à carreau''.\cite{Kohonen-som-pak:1995} 
+
+	\item[Variation des dimensions de la SOM]
+	Des tailles de SOM plus petites pourraient être testées pour vérifier si les mêmes constats sont possibles avec une erreur plus grande.
+
+	\item[SOM toroïdale]
+	Vu les neurones en périphérie des SOM colorées \autoref{sct:coloredSOM}, d'autres formats de carte de Kohonen pourraient être testés. Par exemple, une Toroïdal Self-Organizing Feature Map (TSFOM).
+
+	\item[Calibration de la learning rate]
+	Une méthode de calibration de la learning rate pourrait être implémentée. Deux méthodes seraient envisageables. La première consiste en l'implémentation d'un algorithme de recherche d'optimum comme la recherche avec tabou. Cette méthode apporterait probablement un bon rendement en terme de nombre de SOM calculées pour le gain d'erreur obtenu. La deuxième serait un grid search sur les valeurs de débuts et de fin de la learning rate. Cette méthode permettrait de mieux comprendre la variation d'erreur de manière globale, mais nécessite plus de temps.
+
+	\item[Quantification des component planes]
+	La méthode de quantification des component planes \autoref{sct:quantification} pourraient être revue et implémentée dans un programme. Ce dernier trouverait les zones séparées du dataset selon une SOM donnée et attribuerait des scores au component planes selon une méthode analogue à celle de ce travail.
+
+	\end{description}
+
+\subsection*{Plan clinique}
+
+	\begin{description}
+	\item [Comparaison jour-nuit]
+	Les données stéroïdiennes de jour et de nuit pourraient être comparées à l'aide de deux SOMs et leurs visualisations (U-Matrix et component planes).\\
+	\textbf{But:} comparer la différence d'activité entre stéroïdes
+
+	\item [SOM avec des populations de patients différentes]
+	Calculer des SOM en prenant des sous-sets de données. Par exemple par sexe, selon des tranches d'âges, des BMI, etc.\\
+	\textbf{But:} approfondir la compréhension de l'activité stéroïdienne selon les populations définies.
+	
+	\item [Coloration avec des sous-groupes de stéroïdes]
+	Faire des colorations postérieures de SOM calculées avec des sous-groupes stéroïdiens. Par exemple en choisissant un sous-ensemble où les hommes et femmes ne sont pas mélangés.\\
+	\textbf{But:} Trouver quels sont les sets de stéroïdes qui séparent le mieux certains types de patients.
+
+	\item[Investigations supplémentaires des pressions artérielles]
+	Colorer des SOM selon des variables étrangères de pression artérielle diastolique et systolique non moyennées. La section Ambulatory blood pressure monitoring (AMBP) du SKIPOGH Codebook référence une liste de variables intéressantes. Par exemple: les pressions diastoliques et systoliques de 7h à 22h et de 22h à 7h.\\     
+	\textbf{But:} Approfondir la recherche de groupes selon la tension artérielle des patients dans un dataset uniquement stéroïdien.
+
+	\end{description}
+
+
+	% TODO: Suggérer des variables

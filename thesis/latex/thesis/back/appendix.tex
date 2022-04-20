@@ -1,0 +1,224 @@
+% TODO: Mettre les annexes en page
+
+%===============================================================================
+\chapter{Corrélations globales}
+%===============================================================================
+\clearpage
+
+% -----------------------------------------------------------------------------
+\section{Stéroïdes classées par catégorie}
+% -----------------------------------------------------------------------------
+
+	\begin{table}[H]
+		\centering
+		\input{asset/table/table_03_steroids_categories}
+		\caption{Stéroïdes classées par catégorie}
+		\label{tab:steroidsByCategory}
+	\end{table}
+
+    \begin{figure}[H]
+        \centering
+        \includegraphics[width=\textwidth]{asset/img/03_colored_matrix}    
+        \caption{Matrice de corrélation colorée selon un seuil de P-valeur}
+        \label{fig:colored_matrix}
+    \end{figure}
+
+
+\begin{landscape}
+
+% -----------------------------------------------------------------------------
+\section{Stéroïdes corrélées entre différentes catégories}
+% -----------------------------------------------------------------------------
+
+	\input{asset/table/table_03_corr_diff_cat_top50}
+	\clearpage
+
+% -----------------------------------------------------------------------------
+\section{Stéroïdes corrélées dans un même catégorie}
+% -----------------------------------------------------------------------------
+
+	\input{asset/table/table_03_corr_same_cat_top50}
+
+
+\end{landscape}
+
+%===============================================================================
+\chapter{Corrélations partielles}
+%===============================================================================
+\clearpage
+
+% -----------------------------------------------------------------------------
+\section{Activité des stéroïdes dans la SOM}
+\label{sct:steroidActivityByZone}
+% -----------------------------------------------------------------------------
+
+	\begin{table}[H]
+	    \centering
+	    \input{asset/table/table_som_zone_01}
+	    \caption{Stéroïdes présentes dans la zone d'activité 1}
+	    \label{tab:som_zone_1}
+	\end{table}
+
+	\begin{table}[H]
+	    \centering
+	    \input{asset/table/table_som_zone_02}
+	    \caption{Stéroïdes présentes dans la zone d'activité 2}
+	    \label{tab:som_zone_2}
+	\end{table}
+
+	\begin{table}[H]
+	    \centering
+	    \input{asset/table/table_som_zone_03}
+	    \caption{Stéroïdes présentes dans la zone d'activité 3}
+	    \label{tab:som_zone_3}
+	\end{table}
+
+	\begin{table}[H]
+	    \centering
+	    \input{asset/table/table_som_zone_04}
+	    \caption{Stéroïdes présentes dans la zone d'activité 4}
+	    \label{tab:som_zone_4}
+	\end{table}
+
+	\begin{table}[H]
+	    \centering
+	    \input{asset/table/table_som_zone_05}
+	    \caption{Stéroïdes présentes dans la zone d'activité 5}
+	    \label{tab:som_zone_5}
+	\end{table}
+
+\clearpage
+\begin{landscape}
+
+
+% -----------------------------------------------------------------------------
+\section{Stéroïdes corrélées}
+\label{sct:steroidCorrelation}
+% -----------------------------------------------------------------------------
+
+Ces 2 tables ont été faites à partir de l'arbre des composants planaires \autoref{fig:calibratedCp1} et \autoref{fig:calibratedCp2}.
+
+    \begin{table}[H]
+        \centering
+        \input{asset/table/table_som_correlation}
+        \caption{Les stéroïdes corrélées, répartitie par catégorie et groupe}
+        \label{tab:somCorrelation}
+    \end{table}
+
+    \begin{table}[H]
+        \centering
+        \input{asset/table/table_som_sous_correlation}
+        \caption{Les stéroïdes corrélés de groupe C par catégorie}
+        \label{tab:somSousCorrelation}
+    \end{table}
+
+	\begin{figure}[H]
+	    \centering
+	    \includegraphics[width=\textheight]{asset/img/09_steroid_calibrated_som_lr_0.012_to_0.001.png}
+	    \caption{U-Matrix de la SOM calibrée}
+	    \label{fig:calibratedSom}
+	\end{figure}
+
+\end{landscape}
+
+% -----------------------------------------------------------------------------
+\section{Rapport des grid search de calibration de la SOM}
+% -----------------------------------------------------------------------------
+
+\subsection{Run ``lowRes'' 29/05/16}
+
+	\textfile{asset/calibration/160529_1019_report_steroids_lowRes.md}
+	\clearpage
+
+
+\subsection{Run ``hiRes'' 30/05/16}
+
+	\textfile{asset/calibration/160530_0916_report_steroids_hiRes.md}
+	\clearpage
+
+%===============================================================================
+%===============================================================================
+%===============================================================================
+
+\begin{comment}
+	%===============================================================================
+	\chapter{Jupyter Notebooks}
+	%===============================================================================
+
+	% -----------------------------------------------------------------------------
+	\section{00 steroid profile}
+	% -----------------------------------------------------------------------------
+
+		\pythonfile{./code/00_steroid_profile.py}
+		\clearpage
+
+	% -----------------------------------------------------------------------------
+	\section{01 steroid cleaning}
+	% -----------------------------------------------------------------------------
+
+		\pythonfile{./code/01_steroid_cleaning.py}
+		\clearpage
+
+	% -----------------------------------------------------------------------------
+	\section{02 steroid som}
+	% -----------------------------------------------------------------------------
+
+		\pythonfile{./code/02_steroid_som.py}
+		\clearpage
+
+	% -----------------------------------------------------------------------------
+	\section{03 steroid global correlations}
+	% -----------------------------------------------------------------------------
+
+		\pythonfile{./code/03_steroid_global_correlations.py}
+		\clearpage
+
+	% -----------------------------------------------------------------------------
+	\section{04 som package}
+	% -----------------------------------------------------------------------------
+
+		\pythonfile{./code/04_som_package.py}
+		\clearpage
+
+	% -----------------------------------------------------------------------------
+	\section{05 som calibration test grid run}
+	% -----------------------------------------------------------------------------
+
+		\pythonfile{./code/05_som_calibration_test_grid_run.py}
+		\clearpage
+
+	% -----------------------------------------------------------------------------
+	\section{06 som calibration test plots}
+	% -----------------------------------------------------------------------------
+
+		\pythonfile{./code/06_som_calibration_test_plots.py}
+		\clearpage
+
+	% -----------------------------------------------------------------------------
+	\section{07 som calibration grid run}
+	% -----------------------------------------------------------------------------
+
+		\pythonfile{./code/07_som_calibration_grid_run.py}
+		\clearpage
+
+	% -----------------------------------------------------------------------------
+	\section{08 som calibration plots}
+	% -----------------------------------------------------------------------------
+
+		\pythonfile{./code/08_som_calibration_plots.py}
+		\clearpage
+
+	% -----------------------------------------------------------------------------
+	\section{09 steroid calibrated som}
+	% -----------------------------------------------------------------------------
+
+		\pythonfile{./code/09_steroid_calibrated_som.py}
+		\clearpage
+
+	% -----------------------------------------------------------------------------
+	\section{10 post colored som}
+	% -----------------------------------------------------------------------------
+
+		\pythonfile{./code/10_post_colored_som.py}
+		\clearpage
+\end{comment}

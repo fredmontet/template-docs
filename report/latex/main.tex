@@ -1,0 +1,82 @@
+\documentclass{report}
+
+% ------------------------------------------------------------
+% Metadata
+% ------------------------------------------------------------
+
+\title{Report title}
+\subtitle{Report subtitle}
+
+\author{
+	Joé Bütikofer\\
+	Jules Laville\\
+	Frédéric Montet
+	}
+
+\coauthor{Professor}{
+	Pierre Kuonen\\
+	François Kilchoer
+	}{}{}
+
+\footer{{HES-SO\thinspace//\thinspace Master, Lausanne, \the\year}\\}
+ 
+% ------------------------------------------------------------
+% Report
+% ------------------------------------------------------------
+
+\begin{document}
+ 
+% Frontmatter
+% ------------------------------------------------------------
+\frontmatter
+
+\maketitle
+%\input{front/titlepage} % Modify titlepage.tex to make a custom titlepage
+%\input{front/validation}
+%\input{front/dedication}
+%\input{front/acknowledgements}
+%\include{front/preface}
+%\input{front/abstracts}
+
+% \phantomsection
+% \addcontentsline{toc}{chapter}{List of figures}
+% \listoffigures
+% \cleardoublepage
+
+% \phantomsection
+% \addcontentsline{toc}{chapter}{List of tables}
+% \listoftables
+
+\tableofcontents
+
+% space before each new paragraph according to the template guidelines.
+% (needs to be after titlepage and frontmatter to keep the table of contents lists short)
+
+\setlength{\parskip}{1em}
+
+% Mainmatter
+% ------------------------------------------------------------
+\mainmatter
+
+\include{main/introduction}
+\include{main/method}
+\include{main/result}
+\include{main/discussion}
+\include{main/conclusion}
+
+\begin{appendices}
+\include{back/appendix}
+\end{appendices}
+
+% Backmatter
+% ------------------------------------------------------------
+\backmatter
+
+\include{back/bibliography}
+
+%\phantomsection
+%\addcontentsline{toc}{chapter}{Glossary}
+%\makeglossaries
+%\cleardoublepage
+
+\end{document}

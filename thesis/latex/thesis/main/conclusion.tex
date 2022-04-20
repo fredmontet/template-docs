@@ -1,0 +1,66 @@
+% =============================================================================
+\chapter{Conclusion}
+% =============================================================================
+
+	% Découverte
+		% Méthode de traitement des valeurs manquantes à revoir
+		% On a pu constater les différentes relations entre stéroïdes et groupes de stéroïdes.
+
+	% Correlation globale
+
+	% Correlation partielle
+
+	% Componsants planaires
+
+	% Travaux futurs
+		% SOM exagonale
+		% On pourrait tester d'autres algorithmes de machines learning comme Growing Neural Gas.
+
+	%TODO 
+		% Calibration SOM
+			% Prise de conscience de la complexité de calibration d'une som
+			% nécessite expertise
+
+% Résultats condensés
+
+% 	Matrice de corrélations
+% 		les corrélations n'existent pas uniquement au sein d'une même catégorie biologique
+% 		ordre biologique -> cluster fort corrélés dans une famille
+% 		corrélations entre catégorie -> focalisé sur un stéroïde précis
+
+% 	SOM et component planes
+% 		5 zones composées de différentes stéroïdes
+% 		différentes catégories de stéroïdes selon les zones
+
+% 	Component planes
+% 		6 classes corrélées
+% 		1 classe principale avec 6 sous-classes
+
+%  	SOM colorée
+% 		possibilité de distinguer des variables étrangères dans un ensemble stéroïdien
+% 		Age et sex -> bon
+% 		BMI -> moyen
+% 		SBP et DBP -> mauvais
+
+
+% Take home message
+% 	- nous avons mis en évidence que les corrélations n'existent pas uniquement au sein d'une même catégorie biologique
+% 	- possibilité de distinguer des variables étrangères dans un ensemble stéroïdien
+% 	- plus d'investigations pour SBP et DBP
+
+
+% correlation does not imply causation
+
+
+L'analyse du dataset de stéroïdes issus de la cohorte SKIPOGH a été faite selon deux approche, corrélation globale et corrélation partielle. La première approche a consisté à comparer les corrélations entre deux stéroïdes à l'aide d'une matrice de corrélation. Cette dernière nous a montré la présence de groupes corrélés dans une même catégorie et des corrélations plus focalisées sur un stéroïde précis lorsqu'il s'agit d'interactions entre catégories. 
+
+La deuxième approche a conforté la première par une analyse du dataset en le prenant comme un tout à l'aide d'une SOM. Grâce à celle-ci, nous avons mis en évidence six classes de corrélations et cinq zones où les stéroïdes sont activés. Nous avons ensuite coloré les SOM avec l'âge, le sexe, l'indice de masse corporelle, la pression artérielle diastolique et systolique. Grâce à cette étape, nous avons pu émettre des suppositions pour distinguer des groupes de patients aux caractéristiques différentes uniquement à partir d'un dataset stéroïdien.
+
+Ce travail a participé à la résolution de la problématique de l'IUMSP: mieux comprendre quels sont les rôles des stéroïdes pour l'HTA. Nous avons pu y répondre suite à l'utilisation adéquate des outils cités ci-dessus et nous espérons avoir apporté des pistes de recherche utiles pour le domaine clinique. 
+
+Pour continuer cette étude, l'objectif est de trouver les stéroïdes activés chez les patients hypertendus. Pour cela les tâches à effectuer sont: une comparaison jour-nuit des mesures stéroïdienne et de pression artérielle, une coloration de sous-groupes stéroïdiens obtenus à partir des zones d'activité de la SOM de ce rapport et des SOM avec des populations de patients différentes.
+
+S'il fallait se souvenir d'un message, il serait le suivant: les corrélations entre stéroïdes n'existent pas uniquement au sein d'une même catégorie biologique et il est possible de distinguer des groupes de patients dans un dataset de stéroïdes. Finalement, il est nécessaire de rappeler que les corrélations n'impliquent pas toujours des liens de cause à effet.
+
+
+
